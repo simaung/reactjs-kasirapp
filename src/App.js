@@ -2,25 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Button } from 'reactstrap';
+import HeaderComponent from './components/HeaderComponent';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Kasir App.
-        </p>
-        <Button>Tombol Reactstrap</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HeaderComponent />
     </div>
   );
 }
