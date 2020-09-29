@@ -4,7 +4,7 @@ import { Col, Container, Row } from "reactstrap";
 import {
   HeaderComponent,
   CategoriesComponent,
-  OrderListComponent,
+  CartComponent,
   MenusComponent,
 } from "./components";
 import { API_URL } from "./utils/constant";
@@ -158,7 +158,7 @@ export default class App extends Component {
                     ))}
                 </Row>
               </Col>
-              <OrderListComponent carts={carts} />
+              <CartComponent carts={carts} />
             </Row>
           </div>
         </Container>

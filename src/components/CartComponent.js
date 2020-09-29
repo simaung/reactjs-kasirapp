@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Badge, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
 import { numberWithCommas } from "../utils/utils";
 
-export default class OrderListComponent extends Component {
+export default class CartComponent extends Component {
   render() {
     const { carts } = this.props;
     return (

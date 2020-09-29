@@ -1,11 +1,11 @@
 import HeaderComponent from "./HeaderComponent";
 import CategoriesComponent from "./CategoriesComponent";
-import OrderListComponent from "./OrderListComponent";
+import CartComponent from "./CartComponent";
 import MenusComponent from "./MenusComponent";
 
 export {
   HeaderComponent,
   CategoriesComponent,
-  OrderListComponent,
+  CartComponent,
   MenusComponent,
 };
