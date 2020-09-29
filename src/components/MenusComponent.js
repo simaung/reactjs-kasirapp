@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-} from "reactstrap";
+import { Col, Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
 import { numberWithCommas } from "../utils/utils";
 
-const MenusComponent = ({ menu }) => {
+const MenusComponent = ({ menu, addCart }) => {
   return (
     <Col md="4" xs="6" className="mb-4">
-      <Card className="shadow">
+      <Card className="shadow" onClick={() => addCart(menu)}>
         <CardImg
           top
           width="100%"
