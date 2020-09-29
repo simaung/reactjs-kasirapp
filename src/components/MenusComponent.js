@@ -6,7 +6,6 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  CardSubtitle,
 } from "reactstrap";
 import { numberWithCommas } from "../utils/utils";
 
