@@ -71,6 +71,7 @@ export default class CartComponent extends Component {
 
     Axios.put(API_URL + "keranjangs/" + this.state.cartsDetail.id, data)
       .then((res) => {
+        this.props.getListKeranjang();
         swal({
           title: "Update pesanan",
           text: "berhasil update pesanan " + data.product.nama,
@@ -89,6 +90,7 @@ export default class CartComponent extends Component {
 
     Axios.delete(API_URL + "keranjangs/" + id)
       .then((res) => {
+        this.props.getListKeranjang();
         swal({
           title: "Hapus pesanan",
           text: "berhasil hapus pesanan " + this.state.cartsDetail.product.nama,

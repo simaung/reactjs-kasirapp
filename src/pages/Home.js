@@ -32,6 +32,24 @@ export default class Home extends Component {
         console.log(error);
       });
 
+    this.getListKeranjang();
+  }
+
+  // componentDidUpdate(prevState) {
+  //   if (this.state.carts !== prevState.carts) {
+  //     axios
+  //       .get(API_URL + "keranjangs")
+  //       .then((res) => {
+  //         const carts = res.data;
+  //         this.setState({ carts });
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }
+
+  getListKeranjang = () => {
     axios
       .get(API_URL + "keranjangs")
       .then((res) => {
@@ -41,21 +59,7 @@ export default class Home extends Component {
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  componentDidUpdate(prevState) {
-    if (this.state.carts !== prevState.carts) {
-      axios
-        .get(API_URL + "keranjangs")
-        .then((res) => {
-          const carts = res.data;
-          this.setState({ carts });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }
+  };
 
   changeCategory = (value) => {
     this.setState({
@@ -88,6 +92,8 @@ export default class Home extends Component {
           axios
             .post(API_URL + "keranjangs", cart)
             .then((res) => {
+              this.getListKeranjang();
+
               swal({
                 title: "Berhasil disimpan",
                 text:
@@ -155,7 +161,11 @@ export default class Home extends Component {
                   ))}
               </Row>
             </Col>
-            <CartComponent carts={carts} {...this.props} />
+            <CartComponent
+              carts={carts}
+              {...this.props}
+              getListKeranjang={this.getListKeranjang}
+            />
           </Row>
         </div>
       </Container>
