@@ -1,9 +1,61 @@
 import React, { Component } from "react";
 import { Badge, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
 import { numberWithCommas } from "../utils/utils";
+import ModalCartComponent from "./ModalCartComponent";
 import TotalBayarComponent from "./TotalBayarComponent";
 
 export default class CartComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+      cartsDetail: false,
+      jumlah: 0,
+      keterangan: "",
+    };
+  }
+
+  handleShow = (cart) => {
+    this.setState({
+      showModal: true,
+      cartsDetail: cart,
+      jumlah: cart.jumlah,
+      keterangan: cart.keterangan,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
+  tambah = () => {
+    this.setState({
+      jumlah: this.state.jumlah + 1,
+    });
+  };
+
+  kurang = () => {
+    if (this.state.jumlah !== 1) {
+      this.setState({
+        jumlah: this.state.jumlah - 1,
+      });
+    }
+  };
+
+  changeHandler = (event) => {
+    this.setState({
+      keterangan: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.keterangan);
+  };
+
   render() {
     const { carts } = this.props;
     return (
@@ -16,7 +68,10 @@ export default class CartComponent extends Component {
           <ListGroup flush>
             {carts &&
               carts.map((cart) => (
-                <ListGroupItem key={cart.id}>
+                <ListGroupItem
+                  key={cart.id}
+                  onClick={() => this.handleShow(cart)}
+                >
                   <Row>
                     <Col xs="2">
                       <h5>
@@ -37,6 +92,14 @@ export default class CartComponent extends Component {
                   </Row>
                 </ListGroupItem>
               ))}
+            <ModalCartComponent
+              handleClose={this.handleClose}
+              {...this.state}
+              tambah={this.tambah}
+              kurang={this.kurang}
+              changeHandler={this.changeHandler}
+              handleSubmit={this.handleSubmit}
+            />
           </ListGroup>
         )}
         <TotalBayarComponent carts={carts} {...this.props} />
