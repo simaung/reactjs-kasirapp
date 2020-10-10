@@ -58,8 +58,7 @@ export default class CategoriesComponent extends Component {
                 className={categoryChoosen === category.nama && "active"}
                 style={{ cursor: "pointer" }}
               >
-                <Icon nama={category.nama} />
-                {category.nama}
+                <Icon nama={category.nama} /> {category.nama}
               </ListGroupItem>
             ))}
         </ListGroup>

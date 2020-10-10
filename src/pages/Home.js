@@ -144,7 +144,7 @@ export default class Home extends Component {
                 <strong>Daftar Menu</strong>
               </h4>
               <hr />
-              <Row>
+              <Row className="overflow-auto menu">
                 {menus &&
                   menus.map((menu) => (
                     <MenusComponent

@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { Component } from "react";
-import { Badge, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
+import { Badge, Card, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
 import swal from "sweetalert";
 import { API_URL } from "../utils/constant";
 import { numberWithCommas } from "../utils/utils";
@@ -111,43 +111,45 @@ export default class CartComponent extends Component {
         </h4>
         <hr />
         {carts.length !== 0 && (
-          <ListGroup flush>
-            {carts &&
-              carts.map((cart) => (
-                <ListGroupItem
-                  key={cart.id}
-                  onClick={() => this.handleShow(cart)}
-                >
-                  <Row>
-                    <Col xs="2">
-                      <h5>
-                        <Badge color="success" pill>
-                          {cart.jumlah}
-                        </Badge>
-                      </h5>
-                    </Col>
-                    <Col>
-                      {cart.product.nama}
-                      <p>Rp. {numberWithCommas(cart.product.harga)}</p>
-                    </Col>
-                    <Col>
-                      <strong className="float-right">
-                        Rp. {numberWithCommas(cart.total_harga)}
-                      </strong>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-              ))}
-            <ModalCartComponent
-              handleClose={this.handleClose}
-              {...this.state}
-              tambah={this.tambah}
-              kurang={this.kurang}
-              changeHandler={this.changeHandler}
-              handleSubmit={this.handleSubmit}
-              hapusPesanan={this.hapusPesanan}
-            />
-          </ListGroup>
+          <Card className="overflow-auto cart">
+            <ListGroup flush>
+              {carts &&
+                carts.map((cart) => (
+                  <ListGroupItem
+                    key={cart.id}
+                    onClick={() => this.handleShow(cart)}
+                  >
+                    <Row>
+                      <Col xs="2">
+                        <h5>
+                          <Badge color="success" pill>
+                            {cart.jumlah}
+                          </Badge>
+                        </h5>
+                      </Col>
+                      <Col>
+                        {cart.product.nama}
+                        <p>Rp. {numberWithCommas(cart.product.harga)}</p>
+                      </Col>
+                      <Col>
+                        <strong className="float-right">
+                          Rp. {numberWithCommas(cart.total_harga)}
+                        </strong>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+                ))}
+              <ModalCartComponent
+                handleClose={this.handleClose}
+                {...this.state}
+                tambah={this.tambah}
+                kurang={this.kurang}
+                changeHandler={this.changeHandler}
+                handleSubmit={this.handleSubmit}
+                hapusPesanan={this.hapusPesanan}
+              />
+            </ListGroup>
+          </Card>
         )}
         <TotalBayarComponent carts={carts} {...this.props} />
       </Col>
