@@ -20,10 +20,12 @@ const ModalCartComponent = ({
   cartsDetail,
   jumlah,
   keterangan,
+  totalHarga,
   tambah,
   kurang,
   changeHandler,
   handleSubmit,
+  hapusPesanan,
 }) => {
   if (cartsDetail) {
     return (
@@ -36,7 +38,7 @@ const ModalCartComponent = ({
           <Form onSubmit={handleSubmit}>
             <FormGroup>
               <Label for="exampleEmail">Total Harga</Label>
-              <p>Rp. {numberWithCommas(cartsDetail.total_harga)}</p>
+              <p>Rp. {numberWithCommas(totalHarga)}</p>
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">Jumlah</Label>
@@ -75,7 +77,7 @@ const ModalCartComponent = ({
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger">
+          <Button color="danger" onClick={() => hapusPesanan(cartsDetail.id)}>
             <FontAwesomeIcon icon={faTrash} /> Hapus Pesanan
           </Button>
         </ModalFooter>

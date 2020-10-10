@@ -1,5 +1,8 @@
+import Axios from "axios";
 import React, { Component } from "react";
 import { Badge, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
+import swal from "sweetalert";
+import { API_URL } from "../utils/constant";
 import { numberWithCommas } from "../utils/utils";
 import ModalCartComponent from "./ModalCartComponent";
 import TotalBayarComponent from "./TotalBayarComponent";
@@ -22,6 +25,7 @@ export default class CartComponent extends Component {
       cartsDetail: cart,
       jumlah: cart.jumlah,
       keterangan: cart.keterangan,
+      totalHarga: cart.total_harga,
     });
   };
 
@@ -34,6 +38,8 @@ export default class CartComponent extends Component {
   tambah = () => {
     this.setState({
       jumlah: this.state.jumlah + 1,
+      totalHarga:
+        this.state.cartsDetail.product.harga * (this.state.jumlah + 1),
     });
   };
 
@@ -41,6 +47,8 @@ export default class CartComponent extends Component {
     if (this.state.jumlah !== 1) {
       this.setState({
         jumlah: this.state.jumlah - 1,
+        totalHarga:
+          this.state.cartsDetail.product.harga * (this.state.jumlah - 1),
       });
     }
   };
@@ -53,7 +61,45 @@ export default class CartComponent extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.keterangan);
+    this.handleClose();
+    const data = {
+      jumlah: this.state.jumlah,
+      total_harga: this.state.totalHarga,
+      keterangan: this.state.keterangan,
+      product: this.state.cartsDetail.product,
+    };
+
+    Axios.put(API_URL + "keranjangs/" + this.state.cartsDetail.id, data)
+      .then((res) => {
+        swal({
+          title: "Update pesanan",
+          text: "berhasil update pesanan " + data.product.nama,
+          icon: "success",
+          button: false,
+          timer: 1000,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  hapusPesanan = (id) => {
+    this.handleClose();
+
+    Axios.delete(API_URL + "keranjangs/" + id)
+      .then((res) => {
+        swal({
+          title: "Hapus pesanan",
+          text: "berhasil hapus pesanan " + this.state.cartsDetail.product.nama,
+          icon: "error",
+          button: false,
+          timer: 1000,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   render() {
@@ -99,6 +145,7 @@ export default class CartComponent extends Component {
               kurang={this.kurang}
               changeHandler={this.changeHandler}
               handleSubmit={this.handleSubmit}
+              hapusPesanan={this.hapusPesanan}
             />
           </ListGroup>
         )}
