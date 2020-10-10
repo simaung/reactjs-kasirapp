@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Badge, Col, ListGroup, ListGroupItem, Row } from "reactstrap";
 import { numberWithCommas } from "../utils/utils";
+import TotalBayarComponent from "./TotalBayarComponent";
 
 export default class CartComponent extends Component {
   render() {
@@ -38,6 +39,7 @@ export default class CartComponent extends Component {
               ))}
           </ListGroup>
         )}
+        <TotalBayarComponent carts={carts} {...this.props} />
       </Col>
     );
   }

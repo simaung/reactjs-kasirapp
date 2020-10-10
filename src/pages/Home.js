@@ -155,7 +155,7 @@ export default class Home extends Component {
                   ))}
               </Row>
             </Col>
-            <CartComponent carts={carts} />
+            <CartComponent carts={carts} {...this.props} />
           </Row>
         </div>
       </Container>
